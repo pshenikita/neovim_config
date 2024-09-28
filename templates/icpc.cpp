@@ -8,10 +8,6 @@ typedef long double ld;
 #define sgn(x) (x ? (x > 0 ? 1 : -1) : -1)
 #define sz(x) (int)(x).size()
 #define all(x) (x).begin(), (x).end()
-#define F first
-#define S second
-#define PB push_back
-#define rep(i, a, b) for (int i = a; sgn(b - i) == sgn(b - a + 1e-6); i += sgn(b - a))
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 

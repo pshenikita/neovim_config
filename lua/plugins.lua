@@ -75,12 +75,74 @@ require("lazy").setup({
 		end,
 	},
 
+	-- Custom templates
 	{
 		"glepnir/template.nvim",
 		cmd = { "Template", "TemProject" },
 		config = function()
 			require("template").setup({
 				temp_dir = "~/.config/nvim/templates",
+			})
+		end,
+	},
+
+	-- Custom startup page
+	{
+		"https://git.0x7be.net/dirk/boxdash",
+		config = function()
+			require("neovim-boxdash").setup({
+				title = "",
+				align = {
+					horizontal = 0,
+					vertical = 0,
+				},
+				style = 1,
+				entries = {
+					{ "i", "Switch to insert mode", "insert_mode" },
+					{ "e", "Get an empty buffer", "empty_buffer" },
+					{ "l", "Synchronize with Lazy", "lazy_sync" },
+					"-",
+					{ "q", "Quit NeoVim", "quit_neovim" },
+					"#",
+					{
+						"t",
+						"New ICPC template",
+						function()
+							vim.api.nvim_command(":Template new.cpp icpc")
+						end,
+					},
+				},
+			})
+		end,
+	},
+
+	-- Quickly rename variables
+	{
+		"filipdutescu/renamer.nvim",
+		branch = "master",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			local mappings_utils = require("renamer.mappings.utils")
+			require("renamer").setup({
+				title = "Rename",
+				padding = { top = 0, left = 0, bottom = 0, right = 0 },
+				min_width = 15,
+				max_width = 45,
+				border = true,
+				border_chars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+				show_refs = true,
+				with_qf_list = true,
+				with_popup = true,
+				mappings = {
+					["<C-i>"] = mappings_utils.set_cursor_to_start,
+					["<C-a>"] = mappings_utils.set_cursor_to_end,
+					["<C-e>"] = mappings_utils.set_cursor_to_word_end,
+					["<C-b>"] = mappings_utils.set_cursor_to_word_start,
+					["<C-c>"] = mappings_utils.clear_line,
+					["<C-u>"] = mappings_utils.undo,
+					["<C-r>"] = mappings_utils.redo,
+				},
+				handler = nil,
 			})
 		end,
 	},

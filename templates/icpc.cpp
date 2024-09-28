@@ -15,14 +15,11 @@ typedef long double ld;
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 
-// INT_MAX, INT_MIN, LLONG_MAX, LLONG_MIN
- 
 #pragma GCC optimize("O3", "unroll-loops")
 #pragma GCC target("avx2", "bmi", "bmi2", "lzcnt", "popcnt")
 
 void solve()
 {
-    // РЕШЕНИЕ ЗАДАЧИ
     {{_cursor_}}
 }
 

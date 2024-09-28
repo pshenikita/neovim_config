@@ -31,3 +31,6 @@ vim.keymap.set("n", "<F8>", ":terminal make<CR>", { noremap = true, desc = "Call
 -- Move between tabs in bar
 vim.keymap.set("n", "<A-,>", ":BufferPrevious<CR>", { noremap = true, silent = true, desc = "Go to previous tab" })
 vim.keymap.set("n", "<A-.>", ":BufferNext<CR>", { noremap = true, silent = true, desc = "Go to next tab" })
+
+-- Shortcuts for renamer.nvim
+vim.keymap.set("n", "<leader>rn", ':lua require("renamer").rename()<CR>', { noremap = true, silent = true })

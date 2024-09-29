@@ -1,0 +1,166 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{import}
+
+% Корректность отображения всех шрифтов, кодировок и мат. символов
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amssymb, amsmath, amsthm, mathtools}
+
+% Настройки шрифта
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+
+% Отображение содержания
+\usepackage{tocloft}
+% \addto\captionsrussian{\renewcommand*{\contentsname}{...}}
+\renewcommand{\cftsecfont}{\mdseries}
+\renewcommand{\cftsecpagefont}{\mdseries}
+% https://tex.stackexchange.com/questions/251904/hyperlinks-from-chapter-and-section-headings-back-to-the-table-of-contents
+
+% Заголовки секций
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\large\centering\scshape}{\thesection .\:}{0pt}{}
+\titleformat{\subsection}[hang]{\scshape}{\thesubsection .\:}{0pt}{}
+
+% Вставка картинок
+\usepackage{graphicx}
+\usepackage{asymptote}
+\usepackage{tikz}
+
+\usepackage{wrapfig}        % огибание картинок текстом
+\usepackage{cancel}         % зачёркивания
+\usepackage{indentfirst}    % отступ у первого абзаца
+\usepackage{xcolor}         % цвета
+\setlength{\parskip}{.5ex}  % отступы между абзацами
+\usepackage{enumitem}       % работа со списками
+
+% Отступы на странице
+\usepackage[left=8mm, right=8mm, top=10mm, bottom=14mm, includefoot]{geometry}
+
+% Римские числа из арабских
+\newcommand{\rnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+% Гиперссылки
+\usepackage{hyperref}
+\hypersetup
+{
+    colorlinks = true,
+    linkcolor = true,
+    urlcolor = blue,
+}
+\urlstyle{same}
+
+% Часто используемые обозначения
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\id}{\mathrm{id}}
+\renewcommand{\gcd}{\operatorname{НОД}}
+\newcommand{\lcm}{\operatorname{НОК}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\br}[1]{\left(#1\right)}
+\newcommand{\sqbr}[1]{\left[#1\right]}
+% Перенос символа на следующую строку в формулах
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}%
+ {\hbox{$\mathsurround=0pt #1$}}{}}
+
+ % Оболочка для теоремы
+\newcounter{theorem}[section]
+\newenvironment{theorem}[1][]{\refstepcounter{theorem}
+    \par\smallskip\noindent
+    \ifthenelse{\equal{#1}{}}
+    {{\bfseries Теорема \thetheorem.}}{{\bfseries Теорема \thetheorem\;{\mdseries(#1)}.}}
+}{
+    \par\smallskip
+}
+
+\newenvironment{theorem*}[1][]{
+    \par\smallskip\noindent
+    \ifthenelse{\equal{#1}{}}
+    {{\bfseries Теорема.}}{{\bfseries Теорема\;{\mdseries(#1)}.}}
+}{
+    \par\smallskip
+}
+
+% Оболочки для леммы
+\newcounter{lemma}[section]
+\newenvironment{lemma}[1][]{\refstepcounter{lemma}
+    \par\smallskip\noindent
+    \ifthenelse{\equal{#1}{}}
+    {{\bfseries Лемма \thelemma.}}{{\bfseries Лемма \thelemma\;{\mdseries(#1)}.}}
+}{
+    \par\smallskip
+}
+
+\newenvironment{lemma*}[1][]{
+    \par\smallskip\noindent
+    \ifthenelse{\equal{#1}{}}
+    {{\bfseries Лемма.}}{{\bfseries Лемма\;{\mdseries(#1)}.}}
+}{
+    \par\smallskip
+}
+
+% Оболочка для предложения
+\newcounter{proposition}[section]
+\newenvironment{proposition}[1][]{\refstepcounter{proposition}
+    \par\smallskip\noindent
+    \ifthenelse{\equal{#1}{}}
+    {{\bfseries Предложение \theproposition.}}{{\bfseries Предложение \theproposition\;{\mdseries(#1)}.}}
+}{
+    \par\smallskip
+}
+
+\newenvironment{proposition*}[1][]{
+    \par\smallskip\noindent
+    \ifthenelse{\equal{#1}{}}
+    {{\bfseries Предложение.}}{{\bfseries Предложение\;{\mdseries(#1)}.}}
+}{
+    \par\smallskip
+}
+
+% Оболочка для следствия
+\newcounter{corollary}[section]
+\newenvironment{corollary}[1][]{\refstepcounter{corollary}
+    \par\smallskip\noindent
+    \ifthenelse{\equal{#1}{}}
+    {{\bfseries Следствие \thecorollary.}}{{\bfseries Следствие \thecorollary\;{\mdseries(#1)}.}}
+}{
+    \par\smallskip
+}
+
+\newenvironment{corollary*}[1][]{
+    \par\smallskip\noindent
+    \ifthenelse{\equal{#1}{}}
+    {{\bfseries Следствие.}}{{\bfseries Следствие\;{\mdseries(#1)}.}}
+}{
+    \par\smallskip
+}
+
+% Оболочка для определения
+\newenvironment{definition}[1][]{
+    \par\smallskip\noindent
+    \ifthenelse{\equal{#1}{}}
+    {{\bfseries Определение.}}{{\bfseries Определение\;{\mdseries(#1)}.}}
+    }{
+    \par\smallskip
+}
+
+% Оболочка для доказательства
+\renewenvironment{proof}{
+    \smallskip\noindent$\square$
+}{
+    \hfill$\blacksquare$\par\smallskip
+}
+
+\begin{document}
+
+\end{document}
+

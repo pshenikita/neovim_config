@@ -111,40 +111,23 @@ require("lazy").setup({
 							vim.api.nvim_command(":Template new.cpp icpc")
 						end,
 					},
+					{
+						"l",
+						"New ICPC template",
+						function()
+							vim.api.nvim_command(":Template new.cpp icpc")
+						end,
+					},
 				},
 			})
 		end,
 	},
 
-	-- Quickly rename variables
+	-- Plugin for LaTeX
 	{
-		"filipdutescu/renamer.nvim",
-		branch = "master",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			local mappings_utils = require("renamer.mappings.utils")
-			require("renamer").setup({
-				title = "Rename",
-				padding = { top = 0, left = 0, bottom = 0, right = 0 },
-				min_width = 15,
-				max_width = 45,
-				border = true,
-				border_chars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-				show_refs = true,
-				with_qf_list = true,
-				with_popup = true,
-				mappings = {
-					["<C-i>"] = mappings_utils.set_cursor_to_start,
-					["<C-a>"] = mappings_utils.set_cursor_to_end,
-					["<C-e>"] = mappings_utils.set_cursor_to_word_end,
-					["<C-b>"] = mappings_utils.set_cursor_to_word_start,
-					["<C-c>"] = mappings_utils.clear_line,
-					["<C-u>"] = mappings_utils.undo,
-					["<C-r>"] = mappings_utils.redo,
-				},
-				handler = nil,
-			})
-		end,
+		"lervag/vimtex",
+		lazy = false,
+		init = function() end,
 	},
 
 	-- Useful plugin to show you pending keybinds.
@@ -154,39 +137,10 @@ require("lazy").setup({
 		opts = {
 			icons = {
 				-- set icon mappings to true if you have a Nerd Font
-				mappings = vim.g.have_nerd_font,
+				mappings = true,
 				-- If you are using a Nerd Font: set icons.keys to an empty table which will use the
 				-- default whick-key.nvim defined Nerd Font icons, otherwise define a string table
-				keys = vim.g.have_nerd_font and {} or {
-					Up = "<Up> ",
-					Down = "<Down> ",
-					Left = "<Left> ",
-					Right = "<Right> ",
-					C = "<C-…> ",
-					M = "<M-…> ",
-					D = "<D-…> ",
-					S = "<S-…> ",
-					CR = "<CR> ",
-					Esc = "<Esc> ",
-					ScrollWheelDown = "<ScrollWheelDown> ",
-					ScrollWheelUp = "<ScrollWheelUp> ",
-					NL = "<NL> ",
-					BS = "<BS> ",
-					Space = "<Space> ",
-					Tab = "<Tab> ",
-					F1 = "<F1>",
-					F2 = "<F2>",
-					F3 = "<F3>",
-					F4 = "<F4>",
-					F5 = "<F5>",
-					F6 = "<F6>",
-					F7 = "<F7>",
-					F8 = "<F8>",
-					F9 = "<F9>",
-					F10 = "<F10>",
-					F11 = "<F11>",
-					F12 = "<F12>",
-				},
+				keys = {},
 			},
 
 			-- Document existing key chains
@@ -224,7 +178,7 @@ require("lazy").setup({
 			{ "nvim-telescope/telescope-ui-select.nvim" },
 
 			-- Useful for getting pretty icons, but requires a Nerd Font.
-			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+			{ "nvim-tree/nvim-web-devicons", enabled = true },
 		},
 		config = function()
 			-- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -480,17 +434,6 @@ require("lazy").setup({
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				clangd = {},
-				-- gopls = {},
-				-- pyright = {},
-				-- rust_analyzer = {},
-				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-				--
-				-- Some languages (like typescript) have entire language plugins that can be useful:
-				--    https://github.com/pmizio/typescript-tools.nvim
-				--
-				-- But for many setups, the LSP (`ts_ls`) will work just fine
-				-- ts_ls = {},
-				--
 
 				lua_ls = {
 					-- cmd = {...},
@@ -760,12 +703,10 @@ require("lazy").setup({
 			auto_install = true,
 			highlight = {
 				enable = true,
-				-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-				--  If you are experiencing weird indenting issues, add the language to
-				--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-				additional_vim_regex_highlighting = { "ruby" },
+				additional_vim_regex_highlighting = false,
+				disable = { "latex" },
 			},
-			indent = { enable = true, disable = { "ruby" } },
+			indent = { enable = true },
 		},
 		-- There are additional nvim-treesitter modules that you can use to interact
 		-- with nvim-treesitter. You should go explore a few and see what interests you:
@@ -777,20 +718,6 @@ require("lazy").setup({
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
 		-- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-		icons = vim.g.have_nerd_font and {} or {
-			cmd = "⌘",
-			config = "🛠",
-			event = "📅",
-			ft = "📂",
-			init = "⚙",
-			keys = "🗝",
-			plugin = "🔌",
-			runtime = "💻",
-			require = "🌙",
-			source = "📄",
-			start = "🚀",
-			task = "📌",
-			lazy = "💤 ",
-		},
+		icons = {},
 	},
 })

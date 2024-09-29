@@ -1,0 +1,11 @@
+all: {{_variable_}}.pdf
+
+{{_variable_}}.pdf: {{_variable_}}.tex # {{_variable_}}-*.pdf
+	lualatex $<
+
+asy:
+	asy *.asy
+
+clean:
+	rm *.aux *.log *.pre *.toc
+
